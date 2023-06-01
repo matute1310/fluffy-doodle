@@ -14,7 +14,7 @@ Loader.shared.add({url: "clampy.png", name: "Clampy"});
 
 Loader.shared.onComplete.add(()=>{
 
-	const clampy: Sprite = Sprite.from("Clampy");
+	const clampy: Sprite = Sprite.from("myDino");
 	//const dino: Sprite = Sprite.from("myDino");
 	console.log("Hola mundo",clampy.width,clampy.height)
 	//clampy.anchor.set(0.5);
@@ -30,9 +30,5 @@ Loader.shared.onComplete.add(()=>{
 });
 Loader.shared.load();
 
-//({url: "./dino.png ", name: "myDino"});
 
-//const myLoader  = new Loader();
-//({url: "./dino.png ", name: "myDino"});
-//loader.add();
 
