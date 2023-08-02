@@ -1,9 +1,11 @@
 import { Container, Sprite, Texture,Text } from "pixi.js"
 import { Button } from "../ui/Button";
+import { Keyboard } from "../utils/Keyboard";
 
 
 export class  UIDemo extends Container{
     private buttonMouse:Button;
+    private lastKeyPressed:Text;
     constructor(){
         super();
         
@@ -16,9 +18,11 @@ export class  UIDemo extends Container{
         this.buttonMouse = new Button(
             Texture.from("StartButton1"),
             Texture.from("StartButton3"),
-            Texture.from("StartButton1"),
-            this.onButtonClick.bind(this)// DE ESTA MANERA ASEGURAMOS QUE EL BINDEO SEA AL THIS DEL OBJETO buttonMouse y no del Button.
+            Texture.from("StartButton1")
+            //this.onButtonClick.bind(this)// DE ESTA MANERA ASEGURAMOS QUE EL BINDEO SEA AL THIS DEL OBJETO buttonMouse y no del Button.
+            
         );
+        this.buttonMouse.on("buttonClick", this.onButtonClick, this); // de esta forma se quita el evento del constructor
         this.buttonMouse.position.set(115,125);
         this.buttonMouse.scale.set(1.2);
         this.addChild(this.buttonMouse);
@@ -37,23 +41,28 @@ export class  UIDemo extends Container{
         this.addChild(botonPointer)
 
         //Texto
-        const lastKeyPressed = new Text("Waiting...",{fontSize:20});
-        lastKeyPressed.anchor.set(0.5);
-        lastKeyPressed.position.set(195,290);
-        this.addChild(lastKeyPressed)
+        this.lastKeyPressed = new Text("Waiting...",{fontSize:20});
+        this.lastKeyPressed.anchor.set(0.5);
+        this.lastKeyPressed.position.set(195,290);
+        this.addChild( this.lastKeyPressed);
         
-        document.addEventListener("keydown", this.onKeyDown.bind(this));
+        Keyboard.down.on("KeyB",this.OnKeyB,this) //evento creado con event emitter
+        Keyboard.up.on("KeyB",this.OnKeyBUp,this) //evento creado con event emitter
+ 
         
-        ;
+        
     }
 
     
+    private OnKeyB():void{
+        console.log("aprete la b", this);
+    }
+    private OnKeyBUp():void{
+        console.log("solte la b", this);
+    }
     private onButtonClick():void{
         console.log("my new button clicked", this);
     }
-    private onKeyDown(e:KeyboardEvent):void{
-        console.log("key pressed", e);
-    }
-   
+    
 
 }

@@ -1,6 +1,7 @@
 import { Loader ,Application } from 'pixi.js';
 import { assets } from './assets';
 import { UIDemo } from './scenes/UIDemo';
+import { Keyboard } from './utils/Keyboard';
 //import { Scene } from './scenes/Scene';
 
 
@@ -13,6 +14,7 @@ const app = new Application({
 	height: 720
 });
 
+Keyboard.initialize();
 window.addEventListener("resize",()=>{
 	console.log("resized");
 	const scaleX = window.innerWidth / app.screen.width; 
