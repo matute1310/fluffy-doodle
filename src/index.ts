@@ -1,4 +1,8 @@
-import { Loader ,Application,  Sprite, Container, Point } from 'pixi.js';
+import { Loader ,Application } from 'pixi.js';
+import { assets } from './assets';
+import { UIDemo } from './scenes/UIDemo';
+//import { Scene } from './scenes/Scene';
+
 
 const app = new Application({
 	view: document.getElementById("pixi-canvas") as HTMLCanvasElement,
@@ -35,68 +39,12 @@ window.addEventListener("resize",()=>{
 })
 window.dispatchEvent(new Event("resize"));
 
-Loader.shared.add({url: "dino.png", name: "myDino"});
-Loader.shared.add({url: "hat.png", name: "Hat"});
-Loader.shared.add({url: "globoLila.png", name: "globoLila"});
-Loader.shared.add({url: "globoAzul.png", name: "globoAzul"});
-Loader.shared.add({url: "globoRojo.png", name: "globoRojo"});
+Loader.shared.add(assets);
+
 
 Loader.shared.onComplete.add(()=>{
-	
-	const dino: Sprite = Sprite.from("myDino");
-	const dinoHat: Sprite = Sprite.from("Hat");
-	const gLila: Sprite = Sprite.from("globoLila");
-	const gRojo: Sprite = Sprite.from("globoRojo");
-	const gAzul: Sprite = Sprite.from("globoAzul");
-	const gLila2: Sprite = Sprite.from("globoLila");
-	const gRojo2: Sprite = Sprite.from("globoRojo");
-	const gAzul2: Sprite = Sprite.from("globoAzul");
-	
-	
-	dino.x = 100;
-	dino.y = 100;
-	dinoHat.position.set(207,94);
-	dinoHat.angle = 12;
-	dinoHat.scale.set(0.04);
-	dino.scale.x = 0.5;
-	dino.scale.y = 0.5;
-	gLila.position.set(350,40);
-	gLila.angle = 10;
-	gAzul.scale.set(1.4)
-	gAzul.position.set(-10,-100);
-	gRojo.scale.set(1.1);
-	gRojo.position.set(-250  ,60);
-	gRojo.angle = -15;
-	gLila2.position.set(350,40);
-	gLila2.angle = 10;
-	gAzul2.scale.set(1.4)
-	gAzul2.position.set(-10,-100);
-	gRojo2.scale.set(1.1);
-	gRojo2.position.set(-250  ,60);
-	gRojo2.angle = -15;
-	const dinoWithHat = new Container();
-	const globos = new Container();
-	const globos2 = new Container();
-	dinoWithHat.addChild(dino,dinoHat);
-	globos.addChild(gLila,gRojo,gAzul);
-	globos2.addChild(gLila2,gRojo2,gAzul2);
-	
-	dinoWithHat.scale.set(1.4);
-	dinoWithHat.position.set(300,200);
-	globos.scale.set(0.2);
-	globos2.scale.set(0.2);
-	globos.position.set(900,200);
-	globos2.position.set(300,300);
-	console.log(dinoHat.toGlobal(new Point()));
-	console.log(dinoHat.parent.toGlobal(dinoHat.position));
-
-	//const aux = dinoHat.parent.toLocal(new Point(0,0));
-	//dinoHat.position.copyFrom(aux);
-	app.stage.addChild(dinoWithHat);
-	app.stage.addChild(globos,globos2);
-
-
-
+	const myScene =new UIDemo();
+	app.stage.addChild(myScene);
 });
 Loader.shared.load();
 
